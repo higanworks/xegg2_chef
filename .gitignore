@@ -1,0 +1,4 @@
+.rvmrc
+*.sw[a-z]
+tmp/
+cookbooks/
