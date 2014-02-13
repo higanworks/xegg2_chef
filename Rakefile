@@ -29,8 +29,8 @@ task :replica do |x, args|
   Rake::Task[:env].invoke args.name
   Rake::Task[:role_repl1].invoke args.name
   Rake::Task[:boot].invoke args.name, 3
-#  Rake::Task[:role_repl2].invoke args.name
-#  Rake::Task[:update].invoke args.name
+  Rake::Task[:role_repl2].invoke args.name
+  Rake::Task[:update].invoke args.name
 end
 
 desc 'create environment'
@@ -59,9 +59,10 @@ task :role_repl1 do |x, args|
   r.default_attributes[:mongodb] = {}
   r.default_attributes[:mongodb][:cluster_name] = args.name
   r.default_attributes[:mongodb][:is_replicaset] = true
+  r.default_attributes[:mongodb][:port] = 27017
   r.run_list = []
   r.run_list << 'recipe[mongodb::10gen_repo]'
-  r.run_list << 'recipe[mongodb::replicaset]'
+#  r.run_list << 'recipe[mongodb::replicaset]'
   r.save
 end
 
@@ -85,7 +86,7 @@ end
 desc 'update node'
 task :update, :name
 task :update do |x, args|
-  system("knife ssh 'chef_environment:#{args.name}' --attribute ipaddress -x ubuntu 'sudo chef-client'")
+  system("knife ssh 'chef_environment:#{args.name}' --attribute ipaddress -x ubuntu 'sudo chef-client -l info'")
 end
 
 desc 'cleanup chef-server'

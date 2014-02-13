@@ -3,11 +3,6 @@ SITE
   specs:
     apt (2.3.6)
     build-essential (1.4.2)
-    mongodb (0.13.7)
-      apt (>= 1.8.2)
-      python (>= 0.0.0)
-      runit (>= 1.1.6)
-      yum (>= 0.0.0)
     python (1.4.6)
       build-essential (>= 0.0.0)
       yum-epel (>= 0.0.0)
@@ -15,9 +10,20 @@ SITE
       build-essential (>= 0.0.0)
       yum (~> 3.0)
       yum-epel (>= 0.0.0)
-    yum (3.0.6)
-    yum-epel (0.2.0)
+    yum (3.1.0)
+    yum-epel (0.3.2)
       yum (~> 3.0)
+
+GIT
+  remote: https://github.com/higanworks/chef-mongodb.git
+  ref: xegg
+  sha: cbebc5d863805bae86e5870cf28ab268634646ad
+  specs:
+    mongodb (0.15.0)
+      apt (>= 1.8.2)
+      python (>= 1.3.0)
+      runit (>= 1.1.6)
+      yum (>= 0.0.0)
 
 DEPENDENCIES
   mongodb (>= 0)

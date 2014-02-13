@@ -3,7 +3,9 @@
 
 site 'http://community.opscode.com/api/v1'
 
-cookbook 'mongodb'
+ cookbook 'mongodb', :git => 'https://github.com/higanworks/chef-mongodb.git', :ref => 'xegg'
+# cookbook 'mongodb'
+# cookbook 'mongodb', :git => 'https://github.com/edelight/chef-mongodb.git', :ref => '0.14.10'
 
 # cookbook 'apache2', '>= 1.0.0'
 
