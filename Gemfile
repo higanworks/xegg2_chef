@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 gem 'chef'
-gem 'fog'
+gem 'fog', :git => 'https://github.com/higanworks/fog.git', :ref => 'pull_sakuracloud2'
 gem 'rake'
 gem 'ridley'
 gem 'librarian-chef'
