@@ -34,6 +34,12 @@ class Chef
         :proc => Proc.new { |d| Chef::Config[:knife][:distro] = d },
         :default => "chef-full"
 
+      option :run_list,
+        :short => "-r RUN_LIST",
+        :long => "--run-list RUN_LIST",
+        :description => "Comma separated list of roles/recipes to apply",
+        :proc => lambda { |o| o.split(/[\s,]+/) },
+        :default => []
 
       def run
         ::Fog.credentials[:sakuracloud_api_token] =  Chef::Config[:knife][:sakuracloud_api_token]
@@ -51,8 +57,7 @@ class Chef
         })
 
         bootstrap_ip_address = server.interfaces.first['IPAddress']
-        # puts bootstrap_ip_address
-        puts server.attributes
+        Chef::Log.debug(server.attributes)
         bootstrap_node(server, bootstrap_ip_address).run
       end
 
@@ -64,7 +69,7 @@ class Chef
         bootstrap.config[:ssh_user] = config[:ssh_user] || "ubuntu"
         bootstrap.config[:identity_file] = config[:identity_file]
         bootstrap.config[:host_key_verify] = config[:host_key_verify]
-        bootstrap.config[:chef_node_name] = config[:chef_node_name] || server.id
+        bootstrap.config[:chef_node_name] = config[:chef_node_name] || server.name
         bootstrap.config[:prerelease] = config[:prerelease]
         bootstrap.config[:bootstrap_version] = locate_config_value(:bootstrap_version)
         bootstrap.config[:distro] = locate_config_value(:distro)
