@@ -3,3 +3,4 @@
 tmp/
 cookbooks/
 env.sh
+.chef/client/
