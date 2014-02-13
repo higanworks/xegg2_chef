@@ -44,7 +44,7 @@ export SAKURACLOUD_USER_KEY_ID='REPLACE_TO_YOUR_KEY_ID' ## さくらのクラウ
 
 ### 6. Gemをインストールしよう
 
-`bundle`
+`bundle --deployment`
 
 ### 5. CookbookをChef-Serverにアップロードしよう
 

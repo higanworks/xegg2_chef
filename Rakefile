@@ -21,16 +21,16 @@ task :single do |x, args|
   Rake::Task[:env].invoke args.name
   Rake::Task[:role_single].invoke args.name
   Rake::Task[:boot].invoke args.name, 1
-  Rake::Task[:update].invoke args.name
 end
 
 desc 'create replica set'
 task :replica, :name
 task :replica do |x, args|
   Rake::Task[:env].invoke args.name
-  Rake::Task[:role_repl].invoke args.name
+  Rake::Task[:role_repl1].invoke args.name
   Rake::Task[:boot].invoke args.name, 3
-  Rake::Task[:update].invoke args.name
+#  Rake::Task[:role_repl2].invoke args.name
+#  Rake::Task[:update].invoke args.name
 end
 
 desc 'create environment'
@@ -45,8 +45,6 @@ task :role_single, :name
 task :role_single do |x, args|
   r = @ridley.role.new
   r.name = args.name
-#  r.default_attributes[:mongodb] = {}
-#  r.default_attributes[:mongodb][:cluster_name] = args.name
   r.run_list = []
   r.run_list << 'recipe[mongodb::10gen_repo]'
   r.run_list << 'recipe[mongodb::default]'
@@ -54,22 +52,32 @@ task :role_single do |x, args|
 end
 
 desc 'create role for replicaset'
-task :role_repl, :name
-task :role_repl do |x, args|
+task :role_repl1, :name
+task :role_repl1 do |x, args|
   r = @ridley.role.new
   r.name = args.name
   r.default_attributes[:mongodb] = {}
   r.default_attributes[:mongodb][:cluster_name] = args.name
+  r.default_attributes[:mongodb][:is_replicaset] = true
   r.run_list = []
   r.run_list << 'recipe[mongodb::10gen_repo]'
   r.run_list << 'recipe[mongodb::replicaset]'
   r.save
 end
 
+desc 'create role for replicaset'
+task :role_repl2, :name
+task :role_repl2 do |x, args|
+  r = @ridley.role.find(args.name)
+  r.run_list << 'recipe[mongodb::replicaset]'
+  r.run_list.uniq!
+  r.save
+end
+
 desc 'create node'
-task :boot, :name, :count
+task :boot, :name, :nodes
 task :boot do |x, args|
-  args.count.to_i.times do
+  args.nodes.to_i.times do
     system("knife sakura create -E '#{args.name}' -r 'role[#{args.name}]'")
   end
 end
