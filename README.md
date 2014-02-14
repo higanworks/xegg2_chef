@@ -69,6 +69,7 @@ Rakeのタスクにしました。
 - さくらのクラウドにサーバを作成を３回
 - mongodbインストールを３回
 - それらでmongodbのレプリカセットを作成する
+- `[]`内はレプリカセットのグループ名なので任意です。
 
 #### セットサンプル
 
@@ -94,14 +95,17 @@ rs_default:PRIMARY> rs.config()
 }
 ```
 
+※数が足りなかったら`rake update[piyopiyo]` を実行すれば揃います。
+
 #### ノードを追加する
 
 `knife sakura create`コマンドでNodeを作成すればレプリカセットに参加します。
 
 ```
-$ knife sakura create -E hogehoge -r 'role[hogehoge]'
+$ knife sakura create -E piyopiyo -r 'role[piyopiyo]'
 ```
 
+※`piyopiyo`は参加したいグループ名。
 
 ## 後片付け
 
