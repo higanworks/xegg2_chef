@@ -31,7 +31,7 @@ task :replica do |x, args|
   Rake::Task[:boot].invoke args.name, 3
   Rake::Task[:role_repl2].invoke args.name
   Rake::Task[:update].invoke args.name
-  sleep 10
+  Rake::Task[:update].invoke args.name
   Rake::Task[:update].invoke args.name
 end
 

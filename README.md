@@ -94,6 +94,15 @@ rs_default:PRIMARY> rs.config()
 }
 ```
 
+#### ノードを追加する
+
+`knife sakura create`コマンドでNodeを作成すればレプリカセットに参加します。
+
+```
+$ knife sakura create -E hogehoge -r 'role[hogehoge]'
+```
+
+
 ## 後片付け
 
 `rake sakura:destroy_all` # サーバとディスクを全部消します  
