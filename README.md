@@ -1,8 +1,15 @@
 # ChefによるさくらのクラウドでMongoDBクラスタデモ
 
+## 質問等
+
+このリポジトリのIssueやTwitter等でお気軽にどうぞ。 
+
+- https://github.com/higanworks/xegg2_chef/issues
+- https://twitter.com/sawanoboly
+
 ## 事前準備
 
-このリポジトリをローカルにくろーんしましょう。
+このリポジトリをローカルにクローンしましょう。
 
 ### 1. Chef-Serverを用意します
 
