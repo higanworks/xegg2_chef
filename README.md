@@ -7,6 +7,8 @@
 - https://github.com/higanworks/xegg2_chef/issues
 - https://twitter.com/sawanoboly
 
+セッションスライドはこちら： http://www.slideshare.net/YukihikoSawanobori/x-egg01-chef
+
 ## 事前準備
 
 このリポジトリをローカルにクローンしましょう。
