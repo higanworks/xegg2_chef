@@ -47,7 +47,7 @@ class Chef
 
         compute = ::Fog::Compute[:sakuracloud]
         server = compute.servers.create({
-          :sshkey => '112600032208',        # Your SSH Key id
+          :sshkey => Chef::Config[:knife][:sakuracloud_ssh_key],        # Your SSH Key id
           :serverplan => '2001',            # Server Type
           :volume => {
             :diskplan => 4,                   # Type SSD
